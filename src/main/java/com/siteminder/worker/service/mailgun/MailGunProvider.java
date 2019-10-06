@@ -1,6 +1,7 @@
-package com.siteminder.worker.service;
+package com.siteminder.worker.service.mailgun;
 
 import com.siteminder.worker.model.EmailRequest;
+import com.siteminder.worker.service.EmailProvider;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.MultipartBody;

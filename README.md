@@ -1,8 +1,5 @@
 # Email service worker
 
-Create a service that accepts the necessary information of an email.
-
-
 __Table of Contents__
 
 - [Overview](#overview)
@@ -21,7 +18,7 @@ __Table of Contents__
 
 # Overview
 
-This app listens to the SQS queue, gets the message and sends it to the email provider for further processing. It uses Hystrix to manage the email provide and fallsback to the other email provide if the primary email provider fails.
+This app listens to the SQS queue, gets the message and sends it to the email provider for further processing. It uses Hystrix to manage the email provide and fallback to the other email provide if the primary email provider fails.
 
 # Documentation
 ## Install
@@ -33,11 +30,11 @@ This app listens to the SQS queue, gets the message and sends it to the email pr
 ### Steps
 
 - Unzip the code repo `email-service-worker.zip` (Which is a git repo)
-- Update the `/src/main/resources/application.properties` with `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` 
+- Update the `/src/main/resources/application.properties` with `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `config.mailgun.api.key` and `config.sendgrid.api.key` 
 
 #### Without docker
 - `mvn package`
-- `java -jar email-service-worker-app-0.0.1-SNAPSHOT.jar`
+- `java -jar email-service-worker-0.0.1-SNAPSHOT.jar`
 
 #### With docker
 - `docker build`
@@ -45,23 +42,24 @@ This app listens to the SQS queue, gets the message and sends it to the email pr
 
 # Development
 
-## Notes
+## Commands
 - To run test `mvn test`
-- To build `mvn build`
 - To run checkstyle `mvn verify`
 - To package `mvn package`
 
 
 ## TODO
 ### Operational
+- Set up CI/CD
+- Add health-check endpoint
 - Cloudformation stack with load balancer and auto scaling 
 - Add monitoring of the application 
     - Cloud watch alarm (For API and SQS)
-    - On-call Support for agreed SLA (pagerduty or others)
+    - On-call Support for agreed SLA (pagerduty or other similar service)
     - Configure App insights (new relic)
     - Log forwarder/aggregator (Splunk)
 
 ### Features
-- Configure dead-letter queue for messages that fails more than 10 times (Its an option available in the SQS queue itself).
-- Expose some metrics the count of emails send via the specific email provider.
+- ~~Configure dead-letter queue for messages that fails more than 10 times (Its an option available in the SQS queue itself).~~ (Manual configured queue to have dead letter queue for now)
+- Add and expose metrics like the count of emails send via the specific email provider.
  

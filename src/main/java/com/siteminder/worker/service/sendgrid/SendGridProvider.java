@@ -31,7 +31,6 @@ public class SendGridProvider implements EmailProvider {
         SendGridRequest sendGridRequest = new EmailRequestSendGrindRequestTransformer().transform(request);
         HttpResponse<JsonNode> response = null;
         try {
-            logger.info(convertToJson(sendGridRequest));
             response = Unirest.post(apiEndpoint)
                     .header("authorization", "Bearer " + apiKey)
                     .header("content-type", "application/json")

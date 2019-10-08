@@ -11,7 +11,7 @@ __Table of Contents__
     - [With docker](#without-docker)
 
 - [Development](#development)
-  - [Notes](#notes)
+  - [Tasks](#tasks)
   - [TODO](#todo)
     - [Operational](#operational)
     - [Features](#features)
@@ -42,10 +42,11 @@ This app listens to the SQS queue, gets the message and sends it to the email pr
 
 # Development
 
-## Commands
+## Tasks
 - To run test `mvn test`
 - To run checkstyle `mvn verify`
 - To package `mvn package`
+- To run `mvn spring-boot:run`
 
 
 ## TODO

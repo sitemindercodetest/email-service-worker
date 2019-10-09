@@ -1,6 +1,7 @@
 package com.siteminder.worker.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.siteminder.worker.exception.SendEmailException;
 import com.siteminder.worker.model.EmailRequest;
 import com.siteminder.worker.service.EmailProviderManager;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ public class EmailSqsListener {
     private EmailProviderManager emailProviderManager;
 
     @SqsListener(value = "${sqs.queueName}", deletionPolicy = ON_SUCCESS)
-    public void getMessage(String message) throws IOException {
+    public void getMessage(String message) throws IOException, SendEmailException {
         EmailRequest emailRequest = new ObjectMapper().readValue(message, EmailRequest.class);
         emailProviderManager.sendEmail(emailRequest);
     }

@@ -1,6 +1,7 @@
 package com.siteminder.worker.service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.siteminder.worker.exception.SendEmailException;
 import com.siteminder.worker.model.EmailRequest;
 import com.siteminder.worker.service.mailgun.MailGunProvider;
 import com.siteminder.worker.service.sendgrid.SendGridProvider;
@@ -17,11 +18,11 @@ public class EmailProviderManager {
     private SendGridProvider sendGridProvider;
 
     @HystrixCommand(fallbackMethod = "sendEmailSecondary")
-    public boolean sendEmail(EmailRequest req) {
+    public boolean sendEmail(EmailRequest req) throws SendEmailException {
         return mailGunProvider.sendMail(req);
     }
 
-    public boolean sendEmailSecondary(EmailRequest req) {
+    public boolean sendEmailSecondary(EmailRequest req) throws SendEmailException {
         return sendGridProvider.sendMail(req);
     }
 }

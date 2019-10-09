@@ -1,5 +1,6 @@
 package com.siteminder.worker.service.mailgun;
 
+import com.siteminder.worker.exception.SendEmailException;
 import com.siteminder.worker.model.EmailRequest;
 import com.siteminder.worker.service.EmailProvider;
 import kong.unirest.HttpResponse;
@@ -23,10 +24,10 @@ public class MailGunProvider implements EmailProvider {
     private String apiEndpoint;
 
     @Override
-    public boolean sendMail(EmailRequest request) {
+    public boolean sendMail(EmailRequest request) throws SendEmailException {
         HttpResponse<JsonNode> response = getMultipartBody(request).asJson();
         logger.info(String.format("Response body and status - %s %s", response.getBody(), response.getStatus()));
-        return checkStatus(response, logger);
+        return checkStatus(response);
     }
 
     private MultipartBody getMultipartBody(EmailRequest request) {

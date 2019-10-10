@@ -22,7 +22,7 @@ This app listens to the SQS queue, gets the message and sends it to the email pr
 
 # Documentation
 ## Install
-- Requires Java 1.8 
+- Requires Java 1.11
 - Requires mvn 
 - Docker (Optional) - (https://docs.docker.com/install/)
 - Docker-compose (Optional) - (https://docs.docker.com/compose/install/)
